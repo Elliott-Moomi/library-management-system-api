@@ -2,6 +2,7 @@ package library.management.system.security.service;
 
 import jakarta.transaction.Transactional;
 import library.management.system.domain.User;
+import library.management.system.domain.enums.Roles;
 import library.management.system.security.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ public class UserService {
 
     @Transactional
     public User register(final User user) {
+        user.setRole(Roles.USER);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
     }
