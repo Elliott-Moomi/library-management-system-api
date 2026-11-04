@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "api")
+@RequestMapping(path = "api/v1/lms")
 public class UserController {
 
     private final UserService userService;

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/members")
+@RequestMapping(path = "api/v1/lms/members")
 public class MemberController {
     private final MemberService memberService;
 
