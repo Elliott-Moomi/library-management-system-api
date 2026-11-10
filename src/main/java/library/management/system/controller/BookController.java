@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "api/v1/lms/books")
+@RequestMapping(path = "/api/v1/lms/books")
 public class BookController {
     private final BookService bookService;
 

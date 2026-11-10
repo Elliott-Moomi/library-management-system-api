@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .cors(cors -> cors.configurationSource(request -> corsConfig))
                 .authorizeHttpRequests(request -> request
-                        .requestMatchers("api/v1/lms/login", "api/v1/lms/register").permitAll()
+                        .requestMatchers("/api/v1/lms/login", "/api/v1/lms/register").permitAll()
                         .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)

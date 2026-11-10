@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(path = "api/v1/lms/members")
+@RequestMapping(path = "/api/v1/lms/members")
 public class MemberController {
     private final MemberService memberService;
 
