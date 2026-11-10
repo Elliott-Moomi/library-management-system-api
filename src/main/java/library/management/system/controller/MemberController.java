@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "api/v1/lms/members")
@@ -37,7 +38,7 @@ public class MemberController {
             path = "{id}",
             produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
-    public ResponseEntity<Member> getMemberById(@PathVariable("id") final long id) {
+    public ResponseEntity<Member> getMemberById(@PathVariable("id") final UUID id) {
         final var member = memberService.getMember(id);
         return ResponseEntity.ok(member);
     }
@@ -56,14 +57,14 @@ public class MemberController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
-    public ResponseEntity<Member> updateMember(@PathVariable("id") final long id, @RequestBody final Member member) {
+    public ResponseEntity<Member> updateMember(@PathVariable("id") final UUID id, @RequestBody final Member member) {
 
         return ResponseEntity.ok(memberService.updateMember(id, member));
     }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> removeMember(@PathVariable("id") final long id) {
+    public ResponseEntity<Void> removeMember(@PathVariable("id") final UUID id) {
         memberService.removeMember(id);
 
         return ResponseEntity.noContent().build();

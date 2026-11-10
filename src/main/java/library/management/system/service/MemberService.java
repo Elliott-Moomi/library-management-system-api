@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class MemberService {
@@ -24,7 +25,7 @@ public class MemberService {
         return memberRepository.findAll();
     }
 
-    public Member getMember(Long id) {
+    public Member getMember(UUID id) {
         return memberRepository.findById(id).
                 orElseThrow(() -> new EntityNotFoundException("Member with id: " + id + " does not exist"));
 
@@ -38,7 +39,7 @@ public class MemberService {
     }
 
     @Transactional
-    public Member updateMember(final long id, final Member updatedMember) {
+    public Member updateMember(final UUID id, final Member updatedMember) {
         final var member = getMember(id);
 
         member.setFirstName(updatedMember.getFirstName());
@@ -53,7 +54,7 @@ public class MemberService {
     }
 
     @Transactional
-    public void removeMember(final long id) {
+    public void removeMember(final UUID id) {
         final var member = getMember(id);
         memberRepository.delete(member);
     }
