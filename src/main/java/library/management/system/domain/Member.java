@@ -2,13 +2,14 @@ package library.management.system.domain;
 
 import jakarta.persistence.*;
 import java.util.List;
+import java.util.UUID;
 
 @Entity
 @Table(name = "member")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.UUID)
+    private UUID id;
 
     @Column(name = "firstname", nullable = false)
     private String firstName;
@@ -35,7 +36,7 @@ public class Member {
         this.contact = contact;
     }
 
-    public Long getId() {
+    public UUID getId() {
         return id;
     }
 
@@ -59,7 +60,7 @@ public class Member {
         return contact;
     }
 
-    public void setId(Long id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

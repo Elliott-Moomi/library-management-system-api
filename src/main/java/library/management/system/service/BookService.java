@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.UUID;
+
 @Service
 public class BookService {
     private final BookRepository bookRepository;
@@ -19,7 +21,7 @@ public class BookService {
         return bookRepository.findAll();
     }
 
-    public Book getBook(Long id) {
+    public Book getBook(UUID id) {
         return bookRepository.findById(id).
                 orElseThrow(() -> new EntityNotFoundException("Book with id: " + id + " does not exist"));
 
@@ -31,7 +33,7 @@ public class BookService {
     }
 
     @Transactional
-    public Book updateBook(final long id, final Book updatedBook) {
+    public Book updateBook(final UUID id, final Book updatedBook) {
         final var book = getBook(id);
 
         book.setTitle(updatedBook.getTitle());
@@ -45,7 +47,7 @@ public class BookService {
     }
 
     @Transactional
-    public void removeBook(final long id) {
+    public void removeBook(final UUID id) {
         final var book = getBook(id);
         bookRepository.delete(book);
     }

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "api/v1/lms/books")
@@ -35,7 +36,7 @@ public class BookController {
 
     @GetMapping(path = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('USER', 'LIBRARIAN', 'ADMIN')")
-    public ResponseEntity<Book> getBookById(@PathVariable("id") final long id) {
+    public ResponseEntity<Book> getBookById(@PathVariable("id") final UUID id) {
         final var book = bookService.getBook(id);
         return ResponseEntity.ok(book);
     }
@@ -54,14 +55,14 @@ public class BookController {
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     @PreAuthorize("hasAnyRole('LIBRARIAN','ADMIN')")
-    public ResponseEntity<Book> updateBook(@PathVariable("id") final long id, @RequestBody final Book book) {
+    public ResponseEntity<Book> updateBook(@PathVariable("id") final UUID id, @RequestBody final Book book) {
 
         return ResponseEntity.ok(bookService.updateBook(id, book));
     }
 
     @DeleteMapping(path = "{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    public ResponseEntity<Void> removeBook(@PathVariable("id") final long id) {
+    public ResponseEntity<Void> removeBook(@PathVariable("id") final UUID id) {
         bookService.removeBook(id);
 
         return ResponseEntity.noContent().build();
